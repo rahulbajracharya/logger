@@ -1,0 +1,19 @@
+{
+  "name": "project4",
+  "version": "1.0.0",
+  "description": "Oracledb Connection Test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "rahl",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "mongoose":"*"
+  }
+}
