@@ -1,31 +1,31 @@
 var mongoose =require('mongoose');
 //normal log schema
 var nomLogScheme = mongoose.Schema({
-    Parameters: {
+    parameters: {
         type: String,
     },
-    Result:{
+    result:{
         type:String,
     },
-    Error:{
+    error:{
         type:String,
     },
-    Status:{
+    status:{
         type:String,
     },
-     ExceptionType:{
+    exceptiontype:{
         type:String,
     },
-    ExceptionDetail:{
+    exceptiondetail:{
         type:String,
     },
-    User:{
+    user:{
         type:String,
     },
-    Method:{
+    method:{
         type:String,
     },
-    Device:{
+    device:{
         type:String,
     }
 })

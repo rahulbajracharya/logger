@@ -1,25 +1,25 @@
 var mongoose =require('mongoose');
 //HttpLog Schema
 var httpLogScheme = mongoose.Schema({
-    Header: {
+    header: {
         type: String,
     },
-    Body:{
+    body:{
         type:String,
     },
-    HttpVerb:{
+    httpverb:{
         type:String,
     },
-    TransId:{
+    transid:{
         type:String,
     },
-    Parameters:{
+    parameters:{
         type:String,
     },
-    DeviceType:{
+    devicetype:{
         type:String,
     },
-    ServiceType:{
+    servicetype:{
      type:String,
     }
 })

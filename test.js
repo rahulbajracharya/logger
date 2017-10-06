@@ -1,7 +1,10 @@
 var express= require('express');
 var app =express();
 var bodyParser = require('body-parser');
-var oracledb=require('oracledb');
+var oracledb = require('oracledb');
+var logger = require('./logsTest');
+var httpLog = require('./models/httplog');
+var nomLog = require('./models/nomlog');
 
 app.use(bodyParser.json());
 
@@ -13,7 +16,11 @@ var connAttrs={
 
 app.get('/user_profiles',function(req,res){
     "use strict";
-    
+    logger.addHttpLog(function(err, logs){
+        if(err){
+            throw err;
+        }
+    })
     oracledb.getConnection(connAttrs,function(err,connection){
         if(err){
         res.set('Content-Type','application/json');

@@ -2,7 +2,7 @@
   "name": "project4",
   "version": "1.0.0",
   "description": "Oracledb Connection Test",
-  "main": "app.js",
+  "main": "test1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
