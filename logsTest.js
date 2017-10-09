@@ -2,6 +2,9 @@ var winston = require('winston');
 require('winston-mongodb').MongoDB;
 normalLog = require('./models/nomlog');
 httpLog=require('./models/httplog');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost/test";
+
 
 winston.loggers.add('httpLog',{
 transports:[
@@ -40,6 +43,20 @@ module.exports.addHttpLog=function(log){
     })
 }
 
+module.exports.getHttpLog=function(query){
+    var result; 
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+    result= db.collection("httpLog").find().toArray(function(err) {
+          if (err) throw err;
+          db.close();
+        
+        });
+      });
+      console.log(result);
+      return result;
+   
+}
 //test
 module.exports.showResult =function(log){
     console.log(log);

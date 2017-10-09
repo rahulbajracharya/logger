@@ -39,3 +39,8 @@ module.exports.getHttpLog = function(log){
     })
     return data;
 }
+module.exports.getAllHttpLog = function(){
+  httpLog.find({},function(err,result){
+      console.log(result);
+  });
+}
