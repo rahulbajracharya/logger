@@ -5,23 +5,33 @@ var bodyParser = require('body-parser');
 require('winston-mongodb').MongoDB;
 var normalLog = require('./models/nomlog');
 var httpLog=require('./models/httplog');
-var logbl = require('./logsTest');
+var logger = require('./logsTest');
 
 app.use(bodyParser.json());
 
-//addlogger
-app.post('/api/logger', function(req,res){
+//normallog Post request
+app.post('/api/normlog', function(req,res){
     var data =req.body;
-    console.log(data);
-    logbl.addNormLog(data, function (err){
+    logger.addNormLog(data, function (err,result){
         if(err){
             throw err;
         }
-        
     })
-    console.log("OK");
-    res.json(data);
+    console.log("POST /api/normlog: Normal Log added.");
+    res.status(201).set('httplog','/api/normlog/'+req.body).end();
+})
+
+//httplog Post request
+app.post('/api/httplog',function(req,res){
+    var data = req.body;
+    logger.addHttpLog(data,function(err,result){
+        if(err){
+            throw err;
+        }
+    })
+    console.log("POST /api/httplog: Http Log added");
+    res.status(201).set('httplog','/api/httplog/'+req.body).end();
 })
 
 app.listen(3000);
-console.log("LoggerListining....");
+console.log("Logger Listining....");

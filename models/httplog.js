@@ -26,7 +26,16 @@ var httpLogScheme = mongoose.Schema({
 //
 var httpLog = module.exports = mongoose.model('httpLog',httpLogScheme);
 
-//get httplogs
-module.exports.getHttpLog = function(callback,limit){
-    httpLog.find(callback).limit(limit);
+//http
+module.exports.getHttpLog = function(log){
+    var data=({
+        header:log.header,
+        body:log.body,
+        httpverb:log.httpverb,
+        transid:log.transid,
+        parameters:log.parameters,
+        devicetype:log.devicetype,
+        servicetype:log.servicetype
+    })
+    return data;
 }

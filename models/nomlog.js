@@ -33,6 +33,17 @@ var nomLogScheme = mongoose.Schema({
 var nomLog = module.exports = mongoose.model('nomLog',nomLogScheme);
 
 //get nomlogs
-module.exports.getNomLogs = function(callback,limit){
-    nomLog.find(callback).limit(limit);
+module.exports.getNomLog = function(log){
+    var data=({
+        parameters:log.parameters,
+        result:log.result,
+        error:log.error,
+        status:log.status,
+        exceptiontype:log.exceptiontype,
+        exceptiondetail:log.exceptiondetail,
+        user:log.user,
+        method:log.method,
+        device:log.device
+    })
+    return data;
 }
