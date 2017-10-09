@@ -30,7 +30,7 @@ app.post('/api/normlog', function(req,res){
 
 //httplog get request
 app.get('/api/httplog',function(req, res){
-     logger.getHttpLog("",function(err, data){
+    /* logger.getHttpLog("",function(err, data){
         if(err){
             throw err;
         }
@@ -38,7 +38,7 @@ app.get('/api/httplog',function(req, res){
     console.log("GET /api/http: Log Detail requested");
   
     res.json("asdasd");
-    /*
+    */
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         db.collection("httpLog").find().toArray(function(err, result) {
@@ -47,7 +47,6 @@ app.get('/api/httplog',function(req, res){
           res.json(result);
         });
       });
-    */
 })
 //httplog Post request
 app.post('/api/httplog',function(req,res){
