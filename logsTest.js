@@ -42,21 +42,30 @@ module.exports.addHttpLog=function(log){
         details:httpTestLog
     })
 }
+//get Normal Log
+module.exports.getNormalLog = function(callback){
+    MongoClient.connect(url, function(err,db){
+        if(err) throw err;
+        db.collection("normalLog").find().toArray(function(err,result){
+            if(err) throw err;
+            db.close();
+            return callback(result);
+        })
+    })
 
-module.exports.getHttpLog=function(query){
-    var result; 
+}
+
+//get Http Log
+module.exports.getHttpLog=function(callback){
     MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-    result= db.collection("httpLog").find().toArray(function(err) {
+       if (err) throw err;
+       db.collection("httpLog").find().toArray(function(err, result) {
           if (err) throw err;
           db.close();
-        
+          return callback(result);
         });
       });
-      console.log(result);
-      return result;
-   
-}
+    }
 //test
 module.exports.showResult =function(log){
     console.log(log);

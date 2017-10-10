@@ -8,13 +8,17 @@ require('winston-mongodb').MongoDB;
 var normalLog = require('./models/nomlog');
 var httpLog=require('./models/httplog');
 var logger = require('./logsTest');
-
 app.use(bodyParser.json());
-var db = mongoose.connect('mongodb://localhost/test',{
-    useMongoClient:true,
-});
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost/test";
+
+
+
+//normallog get request
+app.get('/api/normlog',function (req,res){
+      logger.getNormalLog(function(result){
+          res.json(result);
+      })
+    console.log("GET /api/normlog: Normal Log requested.");
+})
 
 //normallog Post request
 app.post('/api/normlog', function(req,res){
@@ -30,24 +34,12 @@ app.post('/api/normlog', function(req,res){
 
 //httplog get request
 app.get('/api/httplog',function(req, res){
-    /* logger.getHttpLog("",function(err, data){
-        if(err){
-            throw err;
-        }
+  var result = logger.getHttpLog(function(items){
+        res.json(items);
     })
-    console.log("GET /api/http: Log Detail requested");
-  
-    res.json("asdasd");
-    */
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        db.collection("httpLog").find().toArray(function(err, result) {
-          if (err) throw err;
-          db.close();
-          res.json(result);
-        });
-      });
+    console.log("GET /api/httplog: HttpLog Detail requested");
 })
+
 //httplog Post request
 app.post('/api/httplog',function(req,res){
     var data = req.body;
