@@ -7,9 +7,10 @@ var nomLogScheme = mongoose.Schema({
     result:{
         type:String,
     },
-    error:{
+    tranid:{
         type:String,
     },
+    //info,debug,...
     status:{
         type:String,
     },
@@ -19,14 +20,19 @@ var nomLogScheme = mongoose.Schema({
     exceptiondetail:{
         type:String,
     },
-    user:{
+    //logged in user
+    userid:{
         type:String,
     },
+    //perticular method called
     method:{
         type:String,
     },
-    device:{
+    devicetype:{
         type:String,
+    },
+    servicetype:{
+        type:String
     }
 })
 //
@@ -37,13 +43,14 @@ module.exports.getNomLog = function(log){
     var data=({
         parameters:log.parameters,
         result:log.result,
-        error:log.error,
+        userid:log.userid,
         status:log.status,
+        tranid:log.tranid,
         exceptiontype:log.exceptiontype,
         exceptiondetail:log.exceptiondetail,
-        user:log.user,
         method:log.method,
-        device:log.device
+        devicetype:log.devicetype,
+        servicetype:log.servicetype,
     })
     return data;
 }

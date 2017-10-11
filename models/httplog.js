@@ -5,6 +5,9 @@ var httpLogScheme = mongoose.Schema({
     header: {
         type: String,
     },
+    url:{
+        type:String,
+    },
     body:{
         type:String,
     },
@@ -22,21 +25,27 @@ var httpLogScheme = mongoose.Schema({
     },
     servicetype:{
      type:String,
+    },
+    //logged in user
+    userid:{
+        type:String
     }
 })
 //
 var httpLog = module.exports = mongoose.model('httpLog',httpLogScheme);
 
-//http
+//
 module.exports.getHttpLog = function(log){
     var data=({
         header:log.header,
         body:log.body,
-        httpverb:log.httpverb,
-        transid:log.transid,
+        url:log.url,
+        userid:log.user_id,
+        httpverb:log.http_verb,
+        transid:log.trans_id,
         parameters:log.parameters,
-        devicetype:log.devicetype,
-        servicetype:log.servicetype
+        devicetype:log.device_type,
+        servicetype:log.service_type
     })
     return data;
 }
@@ -44,6 +53,11 @@ module.exports.getQuery = function (reqs, callback)
 {
     var limit=0;
     var query={};
+    if(reqs.query.user_id)
+        {
+            query1 = { "meta.details.userid" :  reqs.query.user_id };
+            query = Object.assign({},query,query1);
+        }
     if(reqs.query.limit)
         {
             limit = parseInt(reqs.query.limit);
