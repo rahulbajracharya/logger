@@ -4,6 +4,7 @@ normalLog = require('./models/nomlog');
 httpLog=require('./models/httplog');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost/test";
+var objectId = require('mongodb').ObjectID
 
 
 winston.loggers.add('httpLog',{
@@ -43,10 +44,13 @@ module.exports.addHttpLog=function(log){
     })
 }
 //get Normal Log
-module.exports.getNormalLog = function(callback){
+module.exports.getNormalLog = function(res,callback){
     MongoClient.connect(url, function(err,db){
         if(err) throw err;
-        db.collection("normalLog").find().toArray(function(err,result){
+       
+          
+      
+        db.collection("normalLog").find(query).toArray(function(err,result){
             if(err) throw err;
             db.close();
             return callback(result);
@@ -56,13 +60,22 @@ module.exports.getNormalLog = function(callback){
 }
 
 //get Http Log
-module.exports.getHttpLog=function(callback){
+module.exports.getHttpLog=function(reqs, callback){
     MongoClient.connect(url, function(err, db) {
-       if (err) throw err;
-       db.collection("httpLog").find().toArray(function(err, result) {
-          if (err) throw err;
-          db.close();
-          return callback(result);
+       if (err) throw err 
+       httpLog.getQuery(reqs, function(result){
+           if(err) throw err;
+           console.log(result);
+           var limit = 0;
+           if(reqs.query.limit)
+            {
+                limit = parseInt(reqs.query.limit);
+            }
+           db.collection("httpLog").find(result).limit(limit).toArray(function(err, result) {
+           if (err) throw err;
+             db.close();
+             return callback(result);
+       })
         });
       });
     }

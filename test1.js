@@ -1,5 +1,4 @@
-
-var express= require('express');
+ var express= require('express');
 var app =express();
 var mongoose=require('mongoose');
 
@@ -14,7 +13,7 @@ app.use(bodyParser.json());
 
 //normallog get request
 app.get('/api/normlog',function (req,res){
-      logger.getNormalLog(function(result){
+      logger.getNormalLog(req,function(result){
           res.json(result);
       })
     console.log("GET /api/normlog: Normal Log requested.");
@@ -34,7 +33,8 @@ app.post('/api/normlog', function(req,res){
 
 //httplog get request
 app.get('/api/httplog',function(req, res){
-  var result = logger.getHttpLog(function(items){
+    console.log(req.query.transid);
+  var result = logger.getHttpLog(req, function(items){
         res.json(items);
     })
     console.log("GET /api/httplog: HttpLog Detail requested");
