@@ -11,23 +11,23 @@ var httpLogScheme = mongoose.Schema({
     body:{
         type:String,
     },
-    httpverb:{
+    http_verb:{
         type:String,
     },
-    transid:{
+    trans_id:{
         type:String,
     },
     parameters:{
         type:String,
     },
-    devicetype:{
+    device_type:{
         type:String,
     },
-    servicetype:{
+    service_type:{
      type:String,
     },
     //logged in user
-    userid:{
+    user_id:{
         type:String
     }
 })
@@ -40,12 +40,12 @@ module.exports.getHttpLog = function(log){
         header:log.header,
         body:log.body,
         url:log.url,
-        userid:log.user_id,
-        httpverb:log.http_verb,
-        transid:log.trans_id,
+        user_id:log.user_id,
+        http_verb:log.http_verb,
+        trans_id:log.trans_id,
         parameters:log.parameters,
-        devicetype:log.device_type,
-        servicetype:log.service_type
+        device_type:log.device_type,
+        service_type:log.service_type
     })
     return data;
 }
@@ -55,22 +55,22 @@ module.exports.getQuery = function (reqs, callback)
     var query={};
     if(reqs.query.user_id)
         {
-            query1 = { "meta.details.userid" :  reqs.query.user_id };
+            query1 = { "meta.details.user_id" :  reqs.query.user_id };
             query = Object.assign({},query,query1);
         }
     if(reqs.query.limit)
         {
             limit = parseInt(reqs.query.limit);
         }
-    if(reqs.query.logid)
+    if(reqs.query.log_id)
         {
-            var logid = new objectId(reqs.query.logid);
+            var logid = new objectId(reqs.query.log_id);
             query1 = { "_id": logid };
             query=Object.assign({},query,query1);
         }
-    if(reqs.query.transid)
+    if(reqs.query.trans_id)
         {
-            query1 = { "meta.details.transid" :  reqs.query.transid };
+            query1 = { "meta.details.trans_id" :  reqs.query.trans_id };
             query = Object.assign({},query,query1);
         }
     if(reqs.query.level)
@@ -78,14 +78,14 @@ module.exports.getQuery = function (reqs, callback)
             query1 = {"level": reqs.query.level};
             query = Object.assign({},query,query1);
         }
-    if(reqs.query.devicetype)
+    if(reqs.query.device_type)
         {
-            query1 = {"meta.details.devicetype": reqs.query.devicetype}
+            query1 = {"meta.details.device_type": reqs.query.device_type}
             query = Object.assign({},query,query1);         
         }
-    if(reqs.query.servicetype)
+    if(reqs.query.service_type)
         {
-            query1 = {"meta.details.servicetype": reqs.query.servicetype}
+            query1 = {"meta.details.service_type": reqs.query.service_type}
             query = Object.assign({},query, query1);
         }
         return callback(query);
