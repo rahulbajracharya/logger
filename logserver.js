@@ -12,6 +12,7 @@ var httpLogController = require('./controller/httpLogController');
 var normalLogController = require ('./controller/normalLogController');
 var authController = require('./controller/authController');
 var userController = require('./controller/userController');
+var clientController = require('./controller/clientController')
 app.use(bodyParser.json());
 app.use(passport.initialize());
 //Create our Express router
@@ -33,6 +34,9 @@ router.route('/normlog')
     .get(authController.isAuthenticated,normalLogController.getNormalLog)
     .post(authController.isAuthenticated,normalLogController.postNormalLog)
 
+router.route('/clients')
+.get(authController.isAuthenticated,clientController.getClients)
+.post(authController.isAuthenticated,clientController.postClients)
 
 
 
