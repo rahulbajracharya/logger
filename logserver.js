@@ -1,10 +1,11 @@
 //load required packages.
 var express= require('express');
 var mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 // Connect to the beerlocker MongoDB
 mongoose.connect('mongodb://localhost/test', { useMongoClient: true });
 var passport = require('passport');
+var session = require('express-session');
 var app =express();
 var bodyParser = require('body-parser');
 require('winston-mongodb').MongoDB;
@@ -13,7 +14,13 @@ var normalLogController = require ('./controller/normalLogController');
 var authController = require('./controller/authController');
 var userController = require('./controller/userController');
 var clientController = require('./controller/clientController')
+
 app.use(bodyParser.json());
+app.use(session({
+    secret: 'secret',
+    saveUninitialized:true,
+    resave:true
+}));
 app.use(passport.initialize());
 //Create our Express router
 var router = express.Router();
