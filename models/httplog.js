@@ -18,7 +18,7 @@ var httpLogScheme = mongoose.Schema({
         type:String,
     },
     //health status
-    tran_health_type:{
+    trans_health_type:{
 	    type:Number
     },
     parameters:{
@@ -47,7 +47,7 @@ module.exports.getHttpLog = function(log){
         user_id:log.user_id,
         http_verb:log.http_verb,
         trans_id:log.trans_id,
-        tran_health_type:tran_health_type,
+        trans_health_type:trans_health_type,
         parameters:log.parameters,
         device_type:log.device_type,
         service_type:log.service_type
@@ -76,6 +76,11 @@ module.exports.getQuery = function (reqs, callback)
     if(reqs.query.trans_id)
         {
             query1 = { "meta.details.trans_id" :  reqs.query.trans_id };
+            query = Object.assign({},query,query1);
+        }
+    if(reqs.query.trans_health_type)
+        {
+            query1 = { "meta.details.trans_health_type" :  reqs.query.trans_health_type };
             query = Object.assign({},query,query1);
         }
     if(reqs.query.level)

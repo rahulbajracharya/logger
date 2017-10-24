@@ -8,11 +8,11 @@ var nomLogScheme = mongoose.Schema({
     result:{
         type:String,
     },
-    tran_id:{
+    trans_id:{
         type:String,
     },
 	//health status
-	tran_health_type:{
+	trans_health_type:{
 	    type:Number
     },
     //info,debug,...
@@ -50,8 +50,8 @@ module.exports.getNomLog = function(log){
         result:log.result,
         user_id:log.user_id,
         status:log.status,
-        tran_id:log.tran_id,
-        tran_health_type:tran_health_type,
+        trans_id:log.trans_id,
+        trans_health_type:trans_health_type,
         exception_type:log.exception_type,
         exception_detail:log.exception_detail,
         method:log.method,
@@ -84,6 +84,11 @@ module.exports.getQuery = function (reqs, callback)
     if(reqs.query.trans_id)
         {
             query1 = { "meta.details.trans_id" :  reqs.query.trans_id };
+            query = Object.assign({},query,query1);
+        }
+    if(reqs.query.trans_health_type)
+        {
+            query1 = {"meta.details.trans_health_type": reqs.query.trans_health_type}
             query = Object.assign({},query,query1);
         }
     if(reqs.query.level)
