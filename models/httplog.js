@@ -17,6 +17,7 @@ var httpLogScheme = mongoose.Schema({
     trans_id:{
         type:String,
     },
+    //health status
     tran_health_type:{
 	    type:Number
     },
@@ -46,6 +47,7 @@ module.exports.getHttpLog = function(log){
         user_id:log.user_id,
         http_verb:log.http_verb,
         trans_id:log.trans_id,
+        tran_health_type:tran_health_type,
         parameters:log.parameters,
         device_type:log.device_type,
         service_type:log.service_type

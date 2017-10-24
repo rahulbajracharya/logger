@@ -13,7 +13,7 @@ var nomLogScheme = mongoose.Schema({
     },
 	//health status
 	tran_health_type:{
-	type:Number
+	    type:Number
     },
     //info,debug,...
     status:{
@@ -51,6 +51,7 @@ module.exports.getNomLog = function(log){
         user_id:log.user_id,
         status:log.status,
         tran_id:log.tran_id,
+        tran_health_type:tran_health_type,
         exception_type:log.exception_type,
         exception_detail:log.exception_detail,
         method:log.method,
