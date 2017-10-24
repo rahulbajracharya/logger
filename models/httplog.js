@@ -17,6 +17,9 @@ var httpLogScheme = mongoose.Schema({
     trans_id:{
         type:String,
     },
+    tran_health_type:{
+	    type:Number
+    },
     parameters:{
         type:String,
     },

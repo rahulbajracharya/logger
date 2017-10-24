@@ -11,6 +11,10 @@ var nomLogScheme = mongoose.Schema({
     tran_id:{
         type:String,
     },
+	//health status
+	tran_health_type:{
+	type:Number
+    },
     //info,debug,...
     status:{
         type:String,
