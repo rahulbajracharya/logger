@@ -51,7 +51,7 @@ module.exports.getNomLog = function(log){
         user_id:log.user_id,
         status:log.status,
         trans_id:log.trans_id,
-        trans_health_type:trans_health_type,
+        trans_health_type:log.trans_health_type,
         exception_type:log.exception_type,
         exception_detail:log.exception_detail,
         method:log.method,
@@ -61,6 +61,7 @@ module.exports.getNomLog = function(log){
     return data;
 }
 
+//query builder for get
 module.exports.getQuery = function (reqs, callback)
 {
     console.log("here");
@@ -74,6 +75,11 @@ module.exports.getQuery = function (reqs, callback)
     if(reqs.query.limit)
         {
             limit = parseInt(reqs.query.limit);
+        }
+        if(reqs.query.start)
+        {
+            query1={"timestamp":{ $gte: reqs.query.start}};
+            query= Object.assign({},query,query1);
         }
     if(reqs.query.log_id)
         {

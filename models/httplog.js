@@ -47,12 +47,22 @@ module.exports.getHttpLog = function(log){
         user_id:log.user_id,
         http_verb:log.http_verb,
         trans_id:log.trans_id,
-        trans_health_type:trans_health_type,
+        trans_health_type:log.trans_health_type,
         parameters:log.parameters,
         device_type:log.device_type,
         service_type:log.service_type
     })
     return data;
+}
+//convert to ISODatetime
+function convertToISO(datetime1)
+{
+    var datetime = new Date(datetime1);
+    //converting to ISO datetime
+    datetime.setHours(datetime.getHours() + 5);
+    datetime.setMinutes(datetime.getMinutes()+ 45);
+    //conversion end
+    return datetime;
 }
 module.exports.getQuery = function (reqs, callback)
 {
@@ -66,6 +76,25 @@ module.exports.getQuery = function (reqs, callback)
     if(reqs.query.limit)
         {
             limit = parseInt(reqs.query.limit);
+        }
+    if(reqs.query.start && reqs.query.end)
+        {
+            start = convertToISO(reqs.query.start);
+            end = convertToISO(reqs.query.end);
+            query1={ timestamp:{$gte:start, $lte:end}};
+            query= Object.assign({},query,query1);
+        }
+       else if(reqs.query.start)
+        {
+            start = convertToISO(reqs.query.start);
+            query1={ timestamp:{$gte:start}};
+            query= Object.assign({},query,query1);
+        }
+        else if(reqs.query.end)
+        {
+            end = convertToISO(reqs.query.end);
+            query1={ timestamp:{$lte:end}};
+            query= Object.assign({},query,query1);
         }
     if(reqs.query.log_id)
         {
