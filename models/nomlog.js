@@ -61,6 +61,16 @@ module.exports.getNomLog = function(log){
     return data;
 }
 
+//convert datetime to ISOdatetime
+function convertToISO(datetime1)
+{
+    var datetime = new Date(datetime1);
+    //converting to ISO datetime
+    datetime.setHours(datetime.getHours() + 5);
+    datetime.setMinutes(datetime.getMinutes()+ 45);
+    //conversion end
+    return datetime;
+}
 //query builder for get
 module.exports.getQuery = function (reqs, callback)
 {
@@ -76,11 +86,27 @@ module.exports.getQuery = function (reqs, callback)
         {
             limit = parseInt(reqs.query.limit);
         }
-        if(reqs.query.start)
-        {
-            query1={"timestamp":{ $gte: reqs.query.start}};
-            query= Object.assign({},query,query1);
-        }
+     //query for timestamp range
+    if(reqs.query.start && reqs.query.end)
+     {
+         start = convertToISO(reqs.query.start);
+         end = convertToISO(reqs.query.end);
+         query1={ timestamp:{$gte:start, $lte:end}};
+         query= Object.assign({},query,query1);
+     }
+    else if(reqs.query.start)
+     {
+         start = convertToISO(reqs.query.start);
+         query1={ timestamp:{$gte:start}};
+         query= Object.assign({},query,query1);
+     }
+     else if(reqs.query.end)
+     {
+         end = convertToISO(reqs.query.end);
+         query1={ timestamp:{$lte:end}};
+         query= Object.assign({},query,query1);
+     }
+     ///
     if(reqs.query.log_id)
         {
             var logid = new objectId(reqs.query.log_id);

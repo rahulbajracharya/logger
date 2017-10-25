@@ -77,6 +77,7 @@ module.exports.getQuery = function (reqs, callback)
         {
             limit = parseInt(reqs.query.limit);
         }
+ //query for timestamp range
     if(reqs.query.start && reqs.query.end)
         {
             start = convertToISO(reqs.query.start);
@@ -96,6 +97,7 @@ module.exports.getQuery = function (reqs, callback)
             query1={ timestamp:{$lte:end}};
             query= Object.assign({},query,query1);
         }
+        ///
     if(reqs.query.log_id)
         {
             var logid = new objectId(reqs.query.log_id);
