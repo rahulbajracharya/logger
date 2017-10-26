@@ -37,13 +37,13 @@ router.route('/users')
 
 //router configuration for httplog
 router.route('/httplog')
-    .get(authController.isAuthenticated,httpLogController.getHttpLog)
-    .post(authController.isAuthenticated,httpLogController.postHttpLog)
+    .get(httpLogController.getHttpLog)
+    .post(httpLogController.postHttpLog)
 
 //router configuration for normallog    
 router.route('/normlog')
-    .get(authController.isAuthenticated,normalLogController.getNormalLog)
-    .post(authController.isAuthenticated,normalLogController.postNormalLog)
+    .get(normalLogController.getNormalLog)
+    .post(normalLogController.postNormalLog)
 
 router.route('/clients')
 .get(authController.isAuthenticated,clientController.getClients)

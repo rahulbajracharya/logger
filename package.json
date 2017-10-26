@@ -1,9 +1,10 @@
 {
-  "name": "project4",
+  "name": "project5",
   "version": "1.0.0",
   "description": "Oracledb Connection Test",
-  "main": "test1.js",
+  "main": "logserver.js",
   "scripts": {
+    "start":"node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

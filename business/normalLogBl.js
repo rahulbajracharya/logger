@@ -30,7 +30,7 @@ module.exports.getNormalLog = function(reqs,callback){
         if (err) throw err 
         normalLog.getQuery(reqs, function(result){
             if(err) throw err;
-            console.log(result);
+            console.log(result);//returned query
             var limit = 0;
             if(reqs.query.limit)
              {

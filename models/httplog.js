@@ -40,17 +40,22 @@ var httpLog = module.exports = mongoose.model('httpLog',httpLogScheme);
 
 //
 module.exports.getHttpLog = function(log){
+    var templog = log;
+    if(typeof(templog=="string"))
+    {
+        templog =JSON.parse(templog);
+    }
     var data=({
-        header:log.header,
-        body:log.body,
-        url:log.url,
-        user_id:log.user_id,
-        http_verb:log.http_verb,
-        trans_id:log.trans_id,
-        trans_health_type:log.trans_health_type,
-        parameters:log.parameters,
-        device_type:log.device_type,
-        service_type:log.service_type
+        header:templog.header,
+        body:templog.body,
+        url:templog.url,
+        user_id:templog.user_id,
+        http_verb:templog.http_verb,
+        trans_id:templog.trans_id,
+        trans_health_type:templog.trans_health_type,
+        parameters:templog.parameters,
+        device_type:templog.device_type,
+        service_type:templog.service_type
     })
     return data;
 }

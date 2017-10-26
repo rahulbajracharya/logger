@@ -45,18 +45,23 @@ var nomLog = module.exports = mongoose.model('nomLog',nomLogScheme);
 
 //get nomlogs
 module.exports.getNomLog = function(log){
+   var templog=log;
+    if(typeof(templog)=="string")
+    {
+        templog=JSON.parse(templog);
+    }
     var data=({
-        parameters:log.parameters,
-        result:log.result,
-        user_id:log.user_id,
-        status:log.status,
-        trans_id:log.trans_id,
-        trans_health_type:log.trans_health_type,
-        exception_type:log.exception_type,
-        exception_detail:log.exception_detail,
-        method:log.method,
-        device_type:log.device_type,
-        service_type:log.service_type,
+        parameters:templog.parameters,
+        result:templog.result,
+        user_id:templog.user_id,
+        status:templog.status,
+        trans_id:templog.trans_id,
+        trans_health_type:templog.trans_health_type,
+        exception_type:templog.exception_type,
+        exception_detail:templog.exception_detail,
+        method:templog.method,
+        device_type:templog.device_type,
+        service_type:templog.service_type,
     })
     return data;
 }
