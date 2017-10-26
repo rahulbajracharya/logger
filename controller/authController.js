@@ -13,16 +13,18 @@ passport.use(new basicAuth(function(username,password,cb){
     user.findOne({username:username}, function(err, user){
         if(err) return cb(err);
         //user not found
-        if(!user) return db(null,false);
+        if(!user) {
+            console.log("User not match.");
+            return cb(null,false);}
         //check password
         user.verifyPassword(password, function(err, isMatch){
             if(err)  {console.log(err);
                 return cb(err)};
             //password not match
-            if(!isMatch){ console.log("not match");
+            if(!isMatch){ console.log("Invalid Password.");
                 return cb(null,false);}
             //success
-            console.log("success");
+            console.log("Valid user/Success");
             return cb(null,user);
         })
     })

@@ -66,15 +66,14 @@ function convertToISO(datetime1)
 {
     var datetime = new Date(datetime1);
     //converting to ISO datetime
-    datetime.setHours(datetime.getHours() + 5);
-    datetime.setMinutes(datetime.getMinutes()+ 45);
+   // datetime.setHours(datetime.getHours() + 5);
+    //datetime.setMinutes(datetime.getMinutes()+ 45);
     //conversion end
     return datetime;
 }
 //query builder for get
 module.exports.getQuery = function (reqs, callback)
 {
-    console.log("here");
     var limit=0;
     var query={};
     if(reqs.query.user_id)
@@ -120,7 +119,8 @@ module.exports.getQuery = function (reqs, callback)
         }
     if(reqs.query.trans_health_type)
         {
-            query1 = {"meta.details.trans_health_type": reqs.query.trans_health_type}
+            var trans_health_type= parseInt(reqs.query.trans_health_type);
+            query1 = {"meta.details.trans_health_type": trans_health_type}
             query = Object.assign({},query,query1);
         }
     if(reqs.query.level)
