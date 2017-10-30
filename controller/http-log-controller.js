@@ -1,8 +1,8 @@
 //load require package
 
-var normalLog = require('../models/nomlog');
-var httpLog=require('../models/httplog');
-var logger = require('../business/httpLogBl');
+
+var httpLog=require('../models/http-log');
+var logger = require('../business/http-log-bl');
 
 //create endpoint /api/httplog
 exports.getHttpLog = function(req,res)

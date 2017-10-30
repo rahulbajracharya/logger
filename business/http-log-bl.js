@@ -1,7 +1,6 @@
 var winston = require('winston');
 require('winston-mongodb').MongoDB;
-normalLog = require('../models/nomlog');
-httpLog=require('../models/httplog');
+httpLog=require('../models/http-log');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost/test";
 var objectId = require('mongodb').ObjectID

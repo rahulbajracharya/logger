@@ -1,9 +1,8 @@
 
 //load require package
 
-var normalLog = require('../models/nomlog');
-var httpLog=require('../models/httplog');
-var logger = require('../business/normalLogBl');
+var normalLog = require('../models/normal-log');
+var logger = require('../business/normal-log-bl');
 
 
 

@@ -3,7 +3,7 @@ require('winston-mongodb').MongoDB;
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost/test";
 var objectId = require('mongodb').ObjectID
-var normalLog = require('../models/nomlog');
+var normalLog = require('../models/normal-log');
 
 
 winston.loggers.add('normalLog',{
